@@ -1,0 +1,86 @@
+version: "2.29.7"
+services: 
+  dev-db:
+    image: postgres:13
+    ports: 
+      - "5434:5432"  
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123 
+      POSTGRES_DB: nest_first
+    networks:
+      - freecodecamp
+  test-db:
+      image: postgres:13
+      ports: 
+        - "5435:5432"  
+      environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: 123 
+        POSTGRES_DB: nest_first
+      networks:
+        - freecodecamp
+networks:
+  freecodecamp:
+
+
+# version: '3.8'
+# services:
+#   mongodb:
+#     image: mongo:latest
+#     container_name: mongodb
+#     restart: unless-stopped
+
+#     ports:
+#       - '27017:27017'
+#     volumes:
+#       - ./database-data:/data/db
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: password
+#       MONGO_INITDB_DATABASE: nestjs_db_first_example
+#     healthcheck:
+#       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+#       interval: 30s
+#       retries: 5
+#       start_period: 40s
+#       timeout: 30s
+
+  # nestjs-app:
+  #   build: .
+  #   container_name: nestjs-app
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     mongodb:
+  #       condition: service_healthy
+  #   environment:
+  #     MONGO_URI: mongodb://root:password@mongodb:27017/nestjs_db_first_example?authSource=admin
+
+# version: '4.35.1'
+# services:
+#   mongodb:
+#     image: mongo:latest
+#     container_name: mongodb
+#     ports:
+#       - '27017:27017'
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: root
+#       MONGO_INITDB_ROOT_PASSWORD: password
+#     healthcheck:
+#       test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+#       interval: 10s
+#       retries: 5
+#       start_period: 40s
+#       timeout: 5s
+
+#   nestjs-app:
+#     build: .
+#     container_name: nestjs-app
+#     ports:
+#       - '3000:3000'
+#     depends_on:
+#       mongodb:
+#         condition: service_healthy
+#     environment:
+#       MONGO_URI: mongodb://root:example@mongodb:27017/nestjs_db_first_example?authSource=admin
